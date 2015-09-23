@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class MovieTest {
     @Test
-    public void shouldCreateObhjectWhenCreateObject() {
+    public void shouldCreateObhjectWithRightFieldsWhenCreateObject() {
         String title = "TitleStr";
         PriceCodes pc =PriceCodes.Childrens;
         
