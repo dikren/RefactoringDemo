@@ -19,18 +19,16 @@ public class CustomerTest {
         stubRental = mock(Rental.class);
     }
 
-    private void setUpWithParams(PriceCodes pc, int daysRented) {
-        stubRental = createStubRental("Testing title", pc, daysRented);
-    }
 
-    private Rental createStubRental(String movieTitle, PriceCodes pc, int daysRented) {
+    public static Rental createStubRental(String movieTitle, PriceCodes pc, int daysRented) {
         return new RentalBuilder().withDaysRented(daysRented)
                 .withMovie(new MovieBuilder().withPriceCode(pc).withTitle(movieTitle).build()).build();
     }
 
     @Test
     public void shouldReturnRightStringWhenRentalIsNewRelease() {
-        setUpWithParams(PriceCodes.NewRelease, 9);
+        
+        stubRental = createStubRental("Testing title", PriceCodes.NewRelease, 9);
 
         sut.addRental(stubRental);
 
@@ -41,7 +39,7 @@ public class CustomerTest {
 
     @Test
     public void shouldReturnRightStringWhenRentalIsRegularAndDaysRentedBiggerThan2() {
-        setUpWithParams(PriceCodes.Regular, 9);
+        stubRental = createStubRental("Testing title", PriceCodes.Regular, 9);
 
         sut.addRental(stubRental);
 
@@ -52,7 +50,7 @@ public class CustomerTest {
 
     @Test
     public void shouldReturnRightStringWhenRentalIsRegularAndDaysRentedLessThan2() {
-        setUpWithParams(PriceCodes.Regular, 1);
+        stubRental = createStubRental("Testing title", PriceCodes.Regular, 1);
 
         sut.addRental(stubRental);
 
@@ -63,7 +61,7 @@ public class CustomerTest {
 
     @Test
     public void shouldReturnRightStringWhenRentalIsChildrensAndDaysRentedLessThan3() {
-        setUpWithParams(PriceCodes.Childrens, 1);
+        stubRental = createStubRental("Testing title", PriceCodes.Childrens, 1);
 
         sut.addRental(stubRental);
 
@@ -74,7 +72,7 @@ public class CustomerTest {
 
     @Test
     public void shouldReturnRightStringWhenRentalIsChildrensAndDaysRentedBiggerThan3() {
-        setUpWithParams(PriceCodes.Childrens, 9);
+        stubRental = createStubRental("Testing title", PriceCodes.Childrens, 9);
 
         sut.addRental(stubRental);
 
@@ -85,7 +83,7 @@ public class CustomerTest {
 
     @Test
     public void shouldCallGetDaysRentedAtLeastOneTimeWhenCallStatement() {
-        setUpWithParams(PriceCodes.Childrens, 9);
+        stubRental = createStubRental("Testing title", PriceCodes.Childrens, 9);
 
         sut.addRental(stubRental);
 
@@ -97,7 +95,7 @@ public class CustomerTest {
 
     @Test
     public void shouldFrequentRenterPointsEqual3WhenAdding2RentalsAndOnlyOneOfThemWithNewReleaseAndHaveRentedDayesHigherThen1() {
-        setUpWithParams(PriceCodes.NewRelease, 9);
+        stubRental = createStubRental("Testing title", PriceCodes.NewRelease, 9);
 
         Rental stubRental2 = createStubRental("Second movie title", PriceCodes.NewRelease, 1);
 
@@ -109,7 +107,7 @@ public class CustomerTest {
 
     @Test
     public void shouldCalculateTotalAmoutRightWhenAddsMultipleRentals() {
-        setUpWithParams(PriceCodes.Childrens, 10);
+        stubRental = createStubRental("Testing title", PriceCodes.Childrens, 10);
 
         Rental stubRental2 = createStubRental("Second Movie", PriceCodes.Regular, 11000);
         Rental stubRental3 = createStubRental("Third Movie", PriceCodes.NewRelease, 11120);
